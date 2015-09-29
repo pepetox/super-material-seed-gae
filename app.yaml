@@ -1,3 +1,4 @@
+application: super-material-seed-gae
 version: 1
 runtime: python27
 api_version: 1
@@ -7,6 +8,9 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+
+- url: /material
+  static_dir: material
 
 - url: /bootstrap
   static_dir: bootstrap
@@ -19,3 +23,4 @@ libraries:
   version: latest
 - name: jinja2
   version: latest
+
