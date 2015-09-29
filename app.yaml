@@ -12,9 +12,6 @@ handlers:
 - url: /material
   static_dir: material
 
-- url: /bootstrap
-  static_dir: bootstrap
-
 - url: /.*
   script: guestbook.app
 

@@ -1,3 +1,7 @@
+Super seed based in google guestbook example. You can see live example here:
+
+https://super-material-seed-gae.appspot.com/
+
 # Guestbook
 
 Guestbook is an example application showing basic usage of Google App
@@ -19,7 +23,7 @@ High Replication Datastore (HRD) and retrieved using a strongly consistent
 ## Dependencies
 - [webapp2][5]
 - [jinja2][6]
-- [Twitter Bootstrap][7]
+- [Materializecss][7]
 
 [1]: https://developers.google.com/appengine
 [2]: https://python.org
@@ -27,4 +31,4 @@ High Replication Datastore (HRD) and retrieved using a strongly consistent
 [4]: https://developers.google.com/appengine/docs/python/users/
 [5]: http://webapp-improved.appspot.com/
 [6]: http://jinja.pocoo.org/docs/
-[7]: http://twitter.github.com/bootstrap/
+[7]: http://materializecss.com/
