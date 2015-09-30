@@ -1,0 +1,25 @@
+cron:
+- description: daily summary job
+  url: /tasks/summary
+  schedule: every 24 hours
+- description: monday morning mailout
+  url: /mail/weekly
+  schedule: every monday 09:00
+  timezone: Australia/NSW
+- description: new daily summary job
+  url: /tasks/summary
+  schedule: every 24 hours
+  target: beta
+
+
+
+# every 12 hours
+# every 5 minutes from 10:00 to 14:00
+# every day 00:00
+# every monday 09:00
+# 2nd,third mon,wed,thu of march 17:00
+# 1st monday of sep,oct,nov 17:00
+# 1 of jan,april,july,oct 00:00
+
+#you can see your cron task with http://localhost:8000/cron
+#more info https://cloud.google.com/appengine/docs/python/config/cron
