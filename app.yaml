@@ -16,7 +16,7 @@ handlers:
   script: guestbook.app
   login: admin
 
-- url: /my_profile
+- url: /guestbook
   script: guestbook.app
   login: required
 
