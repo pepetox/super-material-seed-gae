@@ -12,6 +12,14 @@ handlers:
 - url: /material
   static_dir: material
 
+- url: /admin
+  script: guestbook.app
+  login: admin
+
+- url: /my_profile
+  script: guestbook.app
+  login: required
+
 - url: /.*
   script: guestbook.app
 
@@ -20,4 +28,8 @@ libraries:
   version: latest
 - name: jinja2
   version: latest
+
+
+
+
 
