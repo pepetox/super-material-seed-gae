@@ -26,7 +26,7 @@ def Get(id):
 
 
 def Update(id, name, description, lang):
-    course = Course(id=id, name=name, description=description, lang = lang)
+    course = Course(id=int(id), name=name, description=description, lang = lang)
     course.put()
     return course
 
