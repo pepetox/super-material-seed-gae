@@ -26,6 +26,8 @@ class Index(main_controller._BaseHandler):
         self.response.write(template.render(self.template_values))
 
 
+
+
 class Show(main_controller._BaseHandler):
 
     def get(self):

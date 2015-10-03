@@ -2,13 +2,32 @@ Super seed based in google guestbook example. You can see live example here:
 
 https://super-material-seed-gae.appspot.com/
 
-# Guestbook
+# Super seed
 
-Guestbook is an example application showing basic usage of Google App
-Engine. Users can read & write text messages and optionaly log-in with
-their Google account. Messages are stored in App Engine (NoSQL)
+This application is a good start point to make incredible projects. 
+There are a folder structure to help to maintain the code when get bigget based on rails folder system. 
+
+Controllers: (in main folder)
+
+  The main_controller.py thats manage the landing page and has the _BaseHandler for use in the rest of handlers of the application.
+  The course controller is a good example for a CRUD controller
+
+Models: (in app/models)
+  The course_model has logic to manage the data
+
+Views: (in app/views)
+  There is a base.html with the header and the footer, the other views use this as parent template
+  In the course folder there are examples for the crud views (edit, index, new, show)
+
+Data are stored in App Engine (NoSQL)
 High Replication Datastore (HRD) and retrieved using a strongly consistent
 (ancestor) query.
+
+Anybody can see the main page but the login is required to enter in the course zone.
+
+Super seed based in google guestbook example. You can see live example here:
+
+https://super-material-seed-gae.appspot.com/
 
 ## Products
 - [App Engine][1]

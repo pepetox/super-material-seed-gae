@@ -19,13 +19,13 @@ class Course(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 def All():
-    return Course.query(ancestor=ndb.Key('Root', '01'))
+    return Course.query(ancestor=ndb.Key('Root', '01')).order(-Course.date)
 
 
 def Get(id):
     logging.info('lanzado el get')
     
-    return Course.get_by_id(int(id))
+    return Course.get_by_id(int(id), parent = ndb.Key('Root', '01'))
 
 
 def Update(id, name, description, lang):
