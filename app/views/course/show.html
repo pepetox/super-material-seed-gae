@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio</title>
+  <title>Course</title>
 </head>
 <body>
-<div style="text-align: center;">
-  <h1>{{name}}</h1>
-
-  <img style="width: 500px; height: auto;" src="{{img_url}}" alt="">
-
-  <p>{{description}}</p>
-  </div>
+<span>
+<p>Name: {{ course.name }}</p>
+<p>Description: {{ course.description }}</p>
+<p>Language: {{ course.lang }}</p>
+ <a href="/courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="/courses/destroy?id={{ course.key.id()}}">Destroy</a>
+</span>
+<br />
+<br />
 </body>
 </html>

@@ -31,7 +31,7 @@ class Show(webapp2.RequestHandler):
 
     def get(self):
         id = self.request.get('id')
-        course = coursemodel.get_by_id(int(id))
+        course = coursemodel.Get(id = id)
         template_values = {
             'course': course
         }
@@ -47,7 +47,6 @@ class New(webapp2.RequestHandler):
 
     def post(self):
         self.course = coursemodel.Insert(name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
-        self.course.put()
         self.redirect('/courses')
 
 
@@ -55,26 +54,18 @@ class Edit(webapp2.RequestHandler):
 
     def get(self):
         id = self.request.get('id')
-        project = Project.get_by_id(int(id))
+        course = coursemodel.Get(id = id)
         template_values = {
-            'name': project.name,
-            'img_url': project.img_url,
-            'description': project.description,
-            'author': project.author,
-            'url': project.url
+            'course': course
         }
         template = JINJA_ENVIRONMENT.get_template('app/views/course/edit.html')
         self.response.write(template.render(template_values))
 
     def post(self):
         id = self.request.get('id')
-        self.project = Project(id = int(id),
-                               name = self.request.get('name'),
-                               img_url = self.request.get('img_url'),
-                               description = self.request.get('description'),
-                               author = self.request.get('author'),
-                               url = self.request.get('url'))
-        self.project.put()
+        self.course = coursemodel.Update(id = id, name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
+       
+       
         self.redirect('/courses')
 
 class Destroy(webapp2.RequestHandler):

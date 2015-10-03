@@ -5,27 +5,21 @@
   <title>Portfolio</title>
 </head>
 <body>
-  <h1>Edit Project</h1>
-
+  <h1>Edit Course</h1>
   <form method="post">
-  <p>Name:</p>
-    <input type="text" name="name" value="{{name}}">
-    <br>
-  <p>Image URL:</p>
-    <input type="text" name="img_url" value="{{img_url}}">
+    <p>Name:</p>
+    <input type="text" name="name" value="{{course.name}}">
     <br>
     <p>Description:</p>
-    <textarea name="description" cols="45" rows="5">{{description}}</textarea>
+    <input type="textarea" name="description" value="{{course.description}}">
     <br>
-    <p>Author:</p>
-    <input type="text" name="author" value="{{author}}">
-    <br>
-    <p>Url:</p>
-    <input type="text" name="url" value="{{url}}">
+    <p>Lang:</p>
+    <input type="text" name="lang" value="{{course.lang}}">
     <br>
     <br>
     <input type="submit">
   </form>
+
 
 </body>
 </html>

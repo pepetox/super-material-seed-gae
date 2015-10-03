@@ -21,7 +21,8 @@ def All():
 
 def Get(id):
     logging.info('lanzado el get')
-    return id.get()
+    
+    return Course.get_by_id(int(id))
 
 
 def Update(id, name, description, lang):
