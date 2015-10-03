@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row center">
       <div class="container">
-          <h1>Index</h1>
+          <h2 class="header center orange-text">Index</h2>
 
           {% for course in courses %}
           <span>
@@ -12,11 +12,13 @@
           </span>
           <br />
           <br />
+          {% endfor %}
+          <a href="/courses/new" >New</a>
       </div>
   </div>
-{% endfor %}
 
 
-<a href="/courses/new">New</a>
+
+
 
 {% endblock %}

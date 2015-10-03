@@ -3,19 +3,19 @@
 {% block content %}
   <div class="row center">
       <div class="container">
-      <h1>Edit Course</h1>
+      <h2 class="header center orange-text">Edit {{ course.name }}</h2>
           <form method="post">
             <p>Name:</p>
             <input type="text" name="name" value="{{course.name}}">
             <br>
             <p>Description:</p>
-            <input type="textarea" name="description" value="{{course.description}}">
+            <input type="text" name="description" value="{{course.description}}">
             <br>
             <p>Lang:</p>
             <input type="text" name="lang" value="{{course.lang}}">
             <br>
             <br>
-            <input type="submit">
+            <input type="submit" class="btn btn-large btn-primary">
           </form>
       </div>
   </div>

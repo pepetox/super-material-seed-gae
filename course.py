@@ -14,32 +14,45 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
+class _BaseHandler(webapp2.RequestHandler):
+  def initialize(self, request, response):
+    super(_BaseHandler, self).initialize(request, response)
+    self.user = users.get_current_user()
+    if self.user:
+        url = users.create_logout_url(self.request.uri)
+        url_linktext = 'Logout'
+    else:
+        url = users.create_login_url(self.request.uri)
+        url_linktext = 'Login'
 
+    self.template_values = {
+        'user': self.user,
+        'url': url,
+        'url_linktext': url_linktext,
+    }
 
-class Index(webapp2.RequestHandler):
+class Index(_BaseHandler):
 
     def get(self):
         courses = coursemodel.All()#.order(-models.Greeting.date)
-        template_values = { 'courses': courses }
+        self.template_values['courses'] = courses 
         template = JINJA_ENVIRONMENT.get_template('app/views/course/index.html')
-        self.response.write(template.render(template_values))
+        self.response.write(template.render(self.template_values))
 
 
 
 
-class Show(webapp2.RequestHandler):
+class Show(_BaseHandler):
 
     def get(self):
         id = self.request.get('id')
         course = coursemodel.Get(id = id)
-        template_values = {
-            'course': course
-        }
+        self.template_values['course'] = course
         template = JINJA_ENVIRONMENT.get_template('app/views/course/show.html')
-        self.response.write(template.render(template_values))
+        self.response.write(template.render(self.template_values))
 
 
-class New(webapp2.RequestHandler):
+class New(_BaseHandler):
 
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('app/views/course/new.html')
@@ -50,16 +63,14 @@ class New(webapp2.RequestHandler):
         self.redirect('/courses')
 
 
-class Edit(webapp2.RequestHandler):
+class Edit(_BaseHandler):
 
     def get(self):
         id = self.request.get('id')
         course = coursemodel.Get(id = id)
-        template_values = {
-            'course': course
-        }
+        self.template_values['course'] = course
         template = JINJA_ENVIRONMENT.get_template('app/views/course/edit.html')
-        self.response.write(template.render(template_values))
+        self.response.write(template.render(self.template_values))
 
     def post(self):
         id = self.request.get('id')
@@ -68,7 +79,7 @@ class Edit(webapp2.RequestHandler):
        
         self.redirect('/courses')
 
-class Destroy(webapp2.RequestHandler):
+class Destroy(_BaseHandler):
 
     def get(self):
         id = self.request.get('id')
