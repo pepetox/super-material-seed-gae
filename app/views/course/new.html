@@ -1,24 +1,23 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Portfolio</title>
-</head>
-<body>
-  <h1>New Project</h1>
+{% extends 'app/views/base.html' %}
 
-  <form method="post">
-    <p>Name:</p>
-    <input type="text" name="name">
-    <br>
-    <p>Description:</p>
-    <textarea name="description" cols="45" rows="5"></textarea>
-    <br>
-    <p>Lang:</p>
-    <input type="text" name="lang">
-    <br>
-    <input type="submit">
-  </form>
+{% block content %}
+  <div class="row center">
+    <div class="container">
+        <h1>New Project</h1>
 
-</body>
-</html>
+        <form method="post">
+          <p>Name:</p>
+          <input type="text" name="name">
+          <br>
+          <p>Description:</p>
+          <textarea name="description" cols="45" rows="5"></textarea>
+          <br>
+          <p>Lang:</p>
+          <input type="text" name="lang">
+          <br>
+          <input type="submit">
+        </form>
+      </div>
+  </div>
+
+{% endblock  %}

@@ -1,17 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Course</title>
-</head>
-<body>
-<span>
-<p>Name: {{ course.name }}</p>
-<p>Description: {{ course.description }}</p>
-<p>Language: {{ course.lang }}</p>
- <a href="/courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="/courses/destroy?id={{ course.key.id()}}">Destroy</a>
-</span>
-<br />
-<br />
-</body>
-</html>
+{% extends 'app/views/base.html' %}
+
+{% block content %}
+  <div class="row center">
+      <div class="container">
+        <span>
+        <p>Name: {{ course.name }}</p>
+        <p>Description: {{ course.description }}</p>
+        <p>Language: {{ course.lang }}</p>
+         <a href="/courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="/courses/destroy?id={{ course.key.id()}}">Destroy</a>
+        </span>
+        <br />
+        <br />
+      </div>
+  </div>
+
+
+{% endblock  %}
