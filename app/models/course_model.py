@@ -41,12 +41,12 @@ def Insert(name, description, lang):
     
     user = users.get_current_user()
     if user:
-        course = Course(name=name, description=description, lang = lang, parent = ndb.Key('Root', '01'))
+        course = Course(name=name, description=description, lang = lang, author= user, parent = ndb.Key('Root', '01'))
         course.put()
         return course
 
 def Delete(id):
-    key = ndb.Key(Course, id)
+    key = ndb.Key(Course, id, parent = ndb.Key('Root', '01'))
     key.delete()
 
 
