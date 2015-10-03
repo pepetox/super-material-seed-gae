@@ -6,6 +6,9 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 
 
+##dummy entity to use as partent
+
+
 
 class Course(ndb.Model):
     """A main model for representing an individual coursebook entry."""
@@ -16,7 +19,7 @@ class Course(ndb.Model):
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 def All():
-    return Course.query()
+    return Course.query(ancestor=ndb.Key('Root', '01'))
 
 
 def Get(id):
@@ -26,16 +29,19 @@ def Get(id):
 
 
 def Update(id, name, description, lang):
-    course = Course(id=int(id), name=name, description=description, lang = lang)
-    course.put()
-    return course
+    # added a root parent to make the query fast ndb.Key('Root', '01')
+    user = users.get_current_user()
+    if user:
+        course = Course(id=int(id), name=name, description=description, lang = lang, parent = ndb.Key('Root', '01'))
+        course.put()
+        return course
 
 
 def Insert(name, description, lang):
     
     user = users.get_current_user()
     if user:
-        course = Course(name=name, description=description, lang = lang)
+        course = Course(name=name, description=description, lang = lang, parent = ndb.Key('Root', '01'))
         course.put()
         return course
 
