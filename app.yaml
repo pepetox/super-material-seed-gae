@@ -16,6 +16,14 @@ handlers:
   script: guestbook.app
   login: admin
 
+- url: /courses
+  script: course.app
+  login: required
+
+- url: /courses/.*
+  script: course.app
+  login: required
+
 - url: /guestbook
   script: guestbook.app
   login: required

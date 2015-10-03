@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Course por</title>
+</head>
+<body>
+  <h1>Index</h1>
+
+{% for course in courses %}
+<span>
+<p>{{ course.name }}</p>
+<a href="courses/show?id={{ course.key.id()}}">Show</a> | <a href="courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="courses/destroy?id={{ course.key.id()}}">Destroy</a>
+</span>
+<br />
+<br />
+{% endfor %}
+
+
+<a href="/courses/new">New</a>
+
+</body>
+</html>

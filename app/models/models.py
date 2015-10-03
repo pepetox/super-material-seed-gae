@@ -17,7 +17,25 @@ class Greeting(ndb.Model):
     content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
+def AllGreeting():
+    return Greeting.query()
 
+
+def UpdateGreeting(id, author, content):
+    guest = Greeting(id=id, first=first, last=last)
+    guest.put()
+    return guest
+
+
+def InsertGreeting(author, content):
+    guest = Greeting(first=first, last=last)
+    guest.put()
+    return guest
+
+
+def DeleteGreeting(id):
+    key = ndb.Key(Greeting, id)
+    key.delete()
 #model with expando
 
 class FlexEmployee(ndb.Expando):

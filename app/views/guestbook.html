@@ -19,7 +19,9 @@
               {% else %}
                An anonymous person wrote:
               {% endif %}
-              <blockquote>{{ greeting.content }}</blockquote>
+              {{ greeting.content }}
+              <button  class="btn-large waves-effect waves-light green">delete</button>
+              <button  class="btn-large waves-effect waves-light orange">update</button>
             </div>
             {% endfor %}
 
