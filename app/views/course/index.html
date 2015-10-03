@@ -4,18 +4,40 @@
   <div class="row center">
       <div class="container">
           <h2 class="header center orange-text">Index</h2>
+     <table>
+        <thead>
+          <tr>
+              <th data-field="id">Name</th>
+              <th data-field="name">Description</th>
+              <th data-field="name">Author</th>
+              <th data-field="name">Actions</th>
+              
+          </tr>
+        </thead>
+        <tbody>
+
 
           {% for course in courses %}
           <span>
-          <p>{{ course.name }}</p>
-          <a href="courses/show?id={{ course.key.id()}}">Show</a> | <a href="courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="courses/destroy?id={{ course.key.id()}}">Destroy</a>
-          </span>
-          <br />
-          <br />
+          <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description }}</td>
+
+            <td>{% if course.author %}{{ course.author }}{% endif %}</td>
+            <td><a href="courses/show?id={{ course.key.id()}}">Show</a> | <a href="courses/edit?id={{ course.key.id()}}">Edit</a>
+            
+             | <a href="courses/destroy?id={{ course.key.id()}}">Destroy</td>
+            </span>
+
+          </tr>
           {% endfor %}
-          <a href="/courses/new" >New</a>
+          </tbody>
+          </table>
+          <a href="/courses/new" >New Course</a>
       </div>
   </div>
+
+
 
 
 
