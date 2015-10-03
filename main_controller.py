@@ -7,7 +7,7 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
-import app.models.models as models
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
