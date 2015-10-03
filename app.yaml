@@ -12,24 +12,17 @@ handlers:
 - url: /material
   static_dir: material
 
-- url: /admin
-  script: guestbook.app
-  login: admin
 
 - url: /courses
-  script: course.app
+  script: course_controller.app
   login: required
 
 - url: /courses/.*
-  script: course.app
-  login: required
-
-- url: /guestbook
-  script: guestbook.app
+  script: course_controller.app
   login: required
 
 - url: /.*
-  script: guestbook.app
+  script: main_controller.app
 
 libraries:
 - name: webapp2

@@ -7,31 +7,17 @@ from google.appengine.ext import ndb
 import jinja2
 import webapp2
 
-import app.models.coursemodel as coursemodel
+import main_controller
+import app.models.course_model as coursemodel
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
 
-class _BaseHandler(webapp2.RequestHandler):
-  def initialize(self, request, response):
-    super(_BaseHandler, self).initialize(request, response)
-    self.user = users.get_current_user()
-    if self.user:
-        url = users.create_logout_url(self.request.uri)
-        url_linktext = 'Logout'
-    else:
-        url = users.create_login_url(self.request.uri)
-        url_linktext = 'Login'
 
-    self.template_values = {
-        'user': self.user,
-        'url': url,
-        'url_linktext': url_linktext,
-    }
 
-class Index(_BaseHandler):
+class Index(main_controller._BaseHandler):
 
     def get(self):
         courses = coursemodel.All()#.order(-models.Greeting.date)
@@ -40,9 +26,7 @@ class Index(_BaseHandler):
         self.response.write(template.render(self.template_values))
 
 
-
-
-class Show(_BaseHandler):
+class Show(main_controller._BaseHandler):
 
     def get(self):
         id = self.request.get('id')
@@ -52,7 +36,7 @@ class Show(_BaseHandler):
         self.response.write(template.render(self.template_values))
 
 
-class New(_BaseHandler):
+class New(main_controller._BaseHandler):
 
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('app/views/course/new.html')
@@ -63,7 +47,7 @@ class New(_BaseHandler):
         self.redirect('/courses')
 
 
-class Edit(_BaseHandler):
+class Edit(main_controller._BaseHandler):
 
     def get(self):
         id = self.request.get('id')
@@ -79,7 +63,7 @@ class Edit(_BaseHandler):
        
         self.redirect('/courses')
 
-class Destroy(_BaseHandler):
+class Destroy(main_controller._BaseHandler):
 
     def get(self):
         id = self.request.get('id')
