@@ -9,7 +9,7 @@
         <p>Name: {{ course.name }}</p>
         <p>Description: {{ course.description }}</p>
         <p>Language: {{ course.lang }}</p>
-         <a href="/courses/edit?id={{ course.key.id()}}">Edit</a> | <a href="/courses/destroy?id={{ course.key.id()}}">Destroy</a>
+         <a href="/courses/edit?key={{ course.key.urlsafe()}}">Edit</a> | <a href="/courses/destroy?key={{ course.key.urlsafe()}}">Destroy</a>
         </span>
         <br />
         <br />

@@ -15,24 +15,31 @@ class Course(ndb.Model):
     author = ndb.UserProperty(indexed=True)
     name = ndb.StringProperty(indexed=True)
     description = ndb.StringProperty(indexed=False)
-    lang = ndb.StringProperty(indexed=False)
+    lang = ndb.StringProperty(indexed=True)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 def All():
+    
+    #strong consistent version NOT RECOMENDED
     return Course.query(ancestor=ndb.Key('Root', '01')).order(-Course.date)
 
+    #eventual consistent version
+    #return Course.query().order(-Course.date)
 
-def Get(id):
+
+def Get(key):
     logging.info('lanzado el get')
+    return key.get()
+
+def Update(key, name, description, lang):
     
-    return Course.get_by_id(int(id), parent = ndb.Key('Root', '01'))
-
-
-def Update(id, name, description, lang):
-    # added a root parent to make the query fast ndb.Key('Root', '01')
     user = users.get_current_user()
     if user:
-        course = Course(id=int(id), name=name, description=description, lang = lang, parent = ndb.Key('Root', '01'))
+        #strong consistent version
+        course = Get(key)
+        course.name = name
+        course.description = description
+        course.lang = lang
         course.put()
         return course
 
@@ -41,12 +48,16 @@ def Insert(name, description, lang):
     
     user = users.get_current_user()
     if user:
+        #eventual consistent version
+        #course = Course(name=name, description=description, lang = lang, author= user)
+        #strong consistent version NOT RECOMENDED
         course = Course(name=name, description=description, lang = lang, author= user, parent = ndb.Key('Root', '01'))
+
         course.put()
         return course
 
-def Delete(id):
-    key = ndb.Key(Course, id, parent = ndb.Key('Root', '01'))
+def Delete(key):
+
     key.delete()
 
 

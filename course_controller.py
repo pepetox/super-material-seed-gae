@@ -20,7 +20,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 class Index(main_controller._BaseHandler):
 
     def get(self):
-        courses = coursemodel.All()#.order(-models.Greeting.date)
+        courses = coursemodel.All()
         self.template_values['courses'] = courses 
         template = JINJA_ENVIRONMENT.get_template('app/views/course/index.html')
         self.response.write(template.render(self.template_values))
@@ -31,8 +31,9 @@ class Index(main_controller._BaseHandler):
 class Show(main_controller._BaseHandler):
 
     def get(self):
-        id = self.request.get('id')
-        course = coursemodel.Get(id = id)
+        my_key_string = self.request.get('key')
+        my_key = ndb.Key(urlsafe=my_key_string)
+        course = coursemodel.Get(key = my_key)
         self.template_values['course'] = course
         template = JINJA_ENVIRONMENT.get_template('app/views/course/show.html')
         self.response.write(template.render(self.template_values))
@@ -46,30 +47,34 @@ class New(main_controller._BaseHandler):
 
     def post(self):
         self.course = coursemodel.Insert(name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
-        self.redirect('/courses')
+        #TODO redirect to show web of the new object
+
+        self.redirect('/courses/show?key='+self.course.key.urlsafe())
 
 
 class Edit(main_controller._BaseHandler):
 
     def get(self):
-        id = self.request.get('id')
-        course = coursemodel.Get(id = id)
+
+        my_key_string = self.request.get('key')
+        my_key = ndb.Key(urlsafe=my_key_string)
+        course = coursemodel.Get(my_key)
         self.template_values['course'] = course
         template = JINJA_ENVIRONMENT.get_template('app/views/course/edit.html')
         self.response.write(template.render(self.template_values))
 
     def post(self):
-        id = self.request.get('id')
-        self.course = coursemodel.Update(id = id, name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
-       
-       
-        self.redirect('/courses')
+        my_key_string = self.request.get('key')
+        my_key = ndb.Key(urlsafe=my_key_string)
+        self.course = coursemodel.Update(key = my_key, name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
+        self.redirect('/courses/show?key='+self.course.key.urlsafe())
 
 class Destroy(main_controller._BaseHandler):
 
     def get(self):
-        id = self.request.get('id')
-        course = coursemodel.Delete(id = int(id))
+        my_key_string = self.request.get('key')
+        my_key = ndb.Key(urlsafe=my_key_string)
+        course = coursemodel.Delete(key = my_key)
         self.redirect('/courses')
 
 

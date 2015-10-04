@@ -24,9 +24,9 @@
             <td>{{ course.description }}</td>
 
             <td>{% if course.author %}{{ course.author }}{% endif %}</td>
-            <td><a href="courses/show?id={{ course.key.id()}}">Show</a> | <a href="courses/edit?id={{ course.key.id()}}">Edit</a>
+            <td><a href="courses/show?key={{ course.key.urlsafe()}}">Show</a> | <a href="courses/edit?key={{ course.key.urlsafe()}}">Edit</a>
             
-             | <a href="courses/destroy?id={{ course.key.id()}}">Destroy</td>
+             | <a href="courses/destroy?key={{ course.key.urlsafe()}}">Destroy</td>
             </span>
 
           </tr>
