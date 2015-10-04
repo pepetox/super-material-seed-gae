@@ -1,6 +1,8 @@
 import os
 import urllib
 import logging
+import csv
+import StringIO
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -21,11 +23,10 @@ class Course(ndb.Model):
 def All():
     
     #strong consistent version NOT RECOMENDED
-    return Course.query(ancestor=ndb.Key('Root', '01')).order(-Course.date)
+    #return Course.query(ancestor=ndb.Key('Root', '01')).order(-Course.date)
 
     #eventual consistent version
-    #return Course.query().order(-Course.date)
-
+    return Course.query().order(-Course.date)
 
 def Get(key):
     logging.info('lanzado el get')
@@ -43,15 +44,14 @@ def Update(key, name, description, lang):
         course.put()
         return course
 
-
 def Insert(name, description, lang):
     
     user = users.get_current_user()
     if user:
         #eventual consistent version
-        #course = Course(name=name, description=description, lang = lang, author= user)
+        course = Course(name=name, description=description, lang = lang, author= user)
         #strong consistent version NOT RECOMENDED
-        course = Course(name=name, description=description, lang = lang, author= user, parent = ndb.Key('Root', '01'))
+        #course = Course(name=name, description=description, lang = lang, author= user, parent = ndb.Key('Root', '01'))
 
         course.put()
         return course
@@ -59,6 +59,22 @@ def Insert(name, description, lang):
 def Delete(key):
 
     key.delete()
+
+
+def Import(my_csv):
+    user = users.get_current_user()
+    stringReader = csv.reader(StringIO.StringIO(my_csv))
+    courses = []
+    for row in stringReader: 
+        #for each row makes a new element
+        course = Course()
+        course.name = row[0].decode('latin-1')
+        course.description = row[1].decode('latin-1')
+        course.lang = row[2].decode('latin-1')
+        course.author = user
+        courses.append(course)
+    return ndb.put_multi(courses)
+
 
 
 #emp = FlexEmployee(name='Sandy', location='SF')

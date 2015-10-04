@@ -9,6 +9,7 @@
           <tr>
               <th data-field="id">Name</th>
               <th data-field="name">Description</th>
+              <th data-field="name">Language</th>
               <th data-field="name">Author</th>
               <th data-field="name">Actions</th>
               
@@ -22,6 +23,7 @@
           <tr>
             <td>{{ course.name }}</td>
             <td>{{ course.description }}</td>
+            <td>{{ course.lang }}</td>
 
             <td>{% if course.author %}{{ course.author }}{% endif %}</td>
             <td><a href="courses/show?key={{ course.key.urlsafe()}}">Show</a> | <a href="courses/edit?key={{ course.key.urlsafe()}}">Edit</a>
@@ -35,7 +37,17 @@
           </table>
           <a href="/courses/new" >New Course</a>
       </div>
+      <div class="container">
+      <br>
+          <form name="importFile" action="/courses/upload" 
+          enctype="multipart/form-data" method="post"> 
+                <p>CSV File(Comma Separated Value) File*: <input type="file" 
+          name="csv"/> 
+                <input type="submit" value="Upload" class="btn btn-large btn-primary"></p> 
+          </form> 
+      </div>
   </div>
+
 
 
 

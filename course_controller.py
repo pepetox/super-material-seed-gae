@@ -1,5 +1,6 @@
 import os
 import urllib
+import logging
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -77,11 +78,16 @@ class Destroy(main_controller._BaseHandler):
         course = coursemodel.Delete(key = my_key)
         self.redirect('/courses')
 
-
+class ProcessUpload(main_controller._BaseHandler):
+    def post(self):
+         n_inserts = coursemodel.Import(my_csv = self.request.get('csv'))
+         self.response.out.write(n_inserts) 
+         self.redirect('/courses')
 app = webapp2.WSGIApplication([
     ('/courses', Index),
     ('/courses/show', Show),
     ('/courses/new', New),
     ('/courses/edit', Edit),
-    ('/courses/destroy', Destroy)
+    ('/courses/destroy', Destroy),
+    ('/courses/upload', ProcessUpload)
 ], debug=True)
