@@ -75,6 +75,20 @@ def Import(my_csv):
         courses.append(course)
     return ndb.put_multi(courses)
 
+def Export(writer):
+    courses = Course.query()
+    for course in courses:
+        desc, lang, author = '','',''
+        name = course.name.encode('UTF-8')
+        if course.description:
+            desc = course.description.encode('UTF-8')
+        if course.lang:
+            lang = course.lang.encode('UTF-8')
+        if course.author:
+            author = course.author
+        writer.writerow([name, desc, lang, author])
+
+
 
 
 #emp = FlexEmployee(name='Sandy', location='SF')
