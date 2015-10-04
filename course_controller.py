@@ -43,7 +43,7 @@ class New(main_controller._BaseHandler):
 
     def get(self):
         template = JINJA_ENVIRONMENT.get_template('app/views/course/new.html')
-        self.response.write(template.render())
+        self.response.write(template.render(self.template_values))
 
     def post(self):
         self.course = coursemodel.Insert(name=self.request.get('name'), description=self.request.get('description'), lang=self.request.get('lang'))
