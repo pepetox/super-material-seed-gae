@@ -5,25 +5,38 @@ https://super-material-seed-gae.appspot.com/
 # Super seed
 
 This application is a good start point to make incredible projects. 
-There are a folder structure to help to maintain the code when get bigget based on rails folder system. 
 
-Controllers: (in main folder)
+Features:
 
-  The main_controller.py thats manage the landing page and has the _BaseHandler for use in the rest of handlers of the application.
-  The course controller is a good example for a CRUD controller
+--There are a folder structure to help to maintain the code when get bigget based on rails folder system. 
 
-Models: (in app/models)
-  The course_model has logic to manage the data
 
-Views: (in app/views)
-  There is a base.html with the header and the footer, the other views use this as parent template
-  In the course folder there are examples for the crud views (edit, index, new, show)
+    Controllers: (in main folder)
 
-Data are stored in App Engine (NoSQL)
-High Replication Datastore (HRD) and retrieved using a strongly consistent
-(ancestor) query.
+      The main_controller.py thats manage the landing page and has the _BaseHandler for use in the rest of handlers of the application.
+      The course controller is a good example for a CRUD controller
 
-Anybody can see the main page but the login is required to enter in the course zone.
+    Models: (in app/models)
+      The course_model has logic to manage the data
+
+    Views: (in app/views)
+      There is a base.html with the header and the footer, the other views use this as parent template
+      In the course folder there are examples for the crud views (edit, index, new, show)
+
+--Strong consistence or Eventual consistence
+  Data are stored in App Engine (NoSQL)
+  High Replication Datastore (HRD) and retrieved using a strongly consistent
+  (ancestor) query.
+
+--Upload and Download by csv files
+
+  In the index view you can upload or download a csv with the data
+
+--Google based auth
+
+  Anybody can see the main page but the login is required to enter in the course zone.
+
+
 
 Super seed based in google guestbook example. You can see live example here:
 
